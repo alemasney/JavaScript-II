@@ -56,28 +56,73 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
 let fullName = [];
+runners.forEach(item => {
+    fullName.push(item.first_name + ' ' + item.last_name);
+})
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
 let allCaps = [];
+
+runners.map(item => {
+    allCaps.push(item.first_name.toUpperCase());
+});
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
 let largeShirts = [];
+
+runners.filter(item => {
+    if(item.shirt_size === "L") {
+        largeShirts.push(item);
+    }
+});
+
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
 let ticketPriceTotal = [];
-console.log(ticketPriceTotal);
+const reducer = (accu, cur) => accu + cur;
+
+runners.forEach( item => ticketPriceTotal.push(item.donation));
+
+console.log(ticketPriceTotal.reduce(reducer));
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// The fun run has been postponed due to bad whether, the director needs all the email's of each runner to contact them as soon as possible
+
+let emailList = [];
+
+runners.forEach(item => emailList.push(item.email));
+console.log(emailList);
 
 // Problem 2
+// The company Skinix have an emergency meeting and the runners are no longer able to attend, provide a list of these runners to be removed.
+let removeRunners = [];
+
+runners.map( item => {
+    if(item.company_name === "Skinix") {
+        removeRunners.push(item);
+    }
+})
+
+console.log(removeRunners);
 
 // Problem 3
+// Use .filter() to find all runners who donated more than 250 and provide there fist and last name.
+
+let runnerGifts = [];
+
+runners.filter( item => {
+    if(item.donation >= 250) {
+        runnerGifts.push(item.first_name + ' ' + item.last_name);
+    }
+})
+
+console.log(runnerGifts);
